@@ -34,7 +34,7 @@ Class hierarchy:
         - TextEdit
 
 """
-from __future__ import absolute_import, division, print_function
+
 
 import argparse
 import cgi
@@ -511,7 +511,7 @@ span.badLink {{color:#F33}}
         TODO: Support different search rules for different file extensions. Since we use the RegEx match groups in
               setSource, each file type might be responsible for building its own HTML representation at that point.
         """
-        exts = self.programs.keys()
+        exts = list(self.programs.keys())
         self.re_usd = utils.usdRegEx(exts)
     
     @Slot(QtCore.QPoint)
@@ -729,8 +729,8 @@ span.badLink {{color:#F33}}
         self.config.setValue("tabSpaces", self.preferences['tabSpaces'])
         
         # Write self.programs to settings object
-        exts = self.programs.keys()
-        progs = self.programs.values()
+        exts = list(self.programs.keys())
+        progs = list(self.programs.values())
         self.config.beginWriteArray("programs")
         for i in range(len(progs)):
             self.config.setArrayIndex(i)
@@ -1624,7 +1624,7 @@ span.badLink {{color:#F33}}
         """
         phrase = self.findBar.text() if self.buttonHighlightAll.isChecked() else highlighter.DONT_MATCH_PHRASE
         if phrase != self.masterHighlighters[None].findPhrase:
-            for lang, h in self.masterHighlighters.iteritems():
+            for lang, h in self.masterHighlighters.items():
                 h.setFindPhrase(phrase)
         if self.currTab.highlighter.dirty:
             with self.overrideCursor():
@@ -1926,10 +1926,10 @@ span.badLink {{color:#F33}}
                 # Update regex used for searching links.
                 self.compileLinkRegEx()
                 # Update highlighter.
-                for lang, h in self.masterHighlighters.iteritems():
+                for lang, h in self.masterHighlighters.items():
                     h.setLinkPattern(self.programs)
             
-            for lang, h in self.masterHighlighters.iteritems():
+            for lang, h in self.masterHighlighters.items():
                 h.setSyntaxHighlighting(self.preferences['syntaxHighlighting'])
             
             # Enable/Disable completer on address bar.
@@ -1954,7 +1954,7 @@ span.badLink {{color:#F33}}
         checked = checked & QtCore.Qt.Checked
         if checked != self.preferences['findMatchCase']:
             self.preferences['findMatchCase'] = checked
-            for lang, h in self.masterHighlighters.iteritems():
+            for lang, h in self.masterHighlighters.items():
                 h.setFindCase(checked)
             with self.overrideCursor():
                 self.currTab.highlighter.rehighlight()

@@ -306,7 +306,7 @@ def loadUiType(uiFile, sourceFile=None, className="DefaultWidgetClass"):
     """
     import sys
     import xml.etree.ElementTree as xml
-    from StringIO import StringIO
+    from io import StringIO
     from Qt import QtWidgets
     
     if not os.path.exists(uiFile) and not os.path.isabs(uiFile):
@@ -332,7 +332,7 @@ def loadUiType(uiFile, sourceFile=None, className="DefaultWidgetClass"):
         frame = {}
         uic.compileUi(f, o, indent=0)
         pyc = compile(o.getvalue(), "<string>", "exec")
-        exec pyc in frame
+        exec(pyc, frame)
         
         # Fetch the base_class and form class based on their type.
         form_class = frame["Ui_{}".format(form_class)]

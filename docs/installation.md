@@ -47,6 +47,11 @@ and this will depend on your setup.py install settings.
 
 ### Mac (OSX)
 
+#### Installation
+1. Launch Terminal
+2. ```cd``` to the downloaded usdmanager folder (you should see a setup.py file in here).
+3. Run ```python setup.py install``` (may need to prepend the command with ```sudo``` and/or add the ```--user``` flag)
+
 #### Known Issues
 - User preferences may not preserve between sessions.
 - Since this is not installed as an entirely self-contained package, the application name (and icon) will by Python, not USD Manager.
